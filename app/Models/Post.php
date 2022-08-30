@@ -33,6 +33,13 @@ class Post extends Model
     ];
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['user'];
+
+    /**
      * Get the user that published this post.
      *
      * @return BelongsTo

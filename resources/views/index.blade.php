@@ -22,17 +22,24 @@
     </head>
     <body class="antialiased">
         <section>
-            <div>Page {{ $posts->currentPage() }} / {{ $posts->total() }}</div>
+            <div>
+                Page {{ $posts->currentPage() }} / {{ $posts->total() }}
+                <span>{{ $posts->links() }}</span>
+            </div>
+
             <ul>
                 @foreach ($posts->items() as $post)
                     <li>
                         <div>
                             <h2>
                                 {{ $post->title }}
-                                <small></small>
+                                <small>{{ $post->author }}</small>
                             </h2>
                             <p>{{ $post->body }}</p>
                             <small>{{ $post->updated_at }}</small>
+                        </div>
+                        <div>
+                            <button>Comments ({{ $post->comments_count }})</button>
                         </div>
                     </li>
                 @endforeach
