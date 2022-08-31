@@ -21,7 +21,6 @@ class PostFactory extends Factory
         return [
             'title' => fake()->sentence(),
             'body' => fake()->paragraph(rand(1, 5)),
-            'is_published' => fake()->boolean(75),
             'created_at' => $date,
             'updated_at' => $date,
         ];

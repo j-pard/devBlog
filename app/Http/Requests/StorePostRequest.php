@@ -25,7 +25,6 @@ class StorePostRequest extends FormRequest
     {
         return [
             'body' => 'required|string|max:10000',
-            'is_published' => 'boolean',
             'title' => 'required|string|max:255',
             'user_id' => 'required|numeric|min:1',
         ];

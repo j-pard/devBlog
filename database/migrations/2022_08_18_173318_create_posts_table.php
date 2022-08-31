@@ -18,7 +18,6 @@ return new class extends Migration
             $table->foreignId('user_id')->onDelete('cascade');
             $table->string('title');
             $table->text('body');
-            $table->boolean('is_published')->default(false);
             $table->timestamps();
         });
     }

@@ -11,25 +11,26 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class PostsController extends Controller
 {
-    private int $perPage = 6;
-
     /**
      * Display a listing of the resource.
      *
-     * @param Request $request
-     * @return View
+     * @return InertiaResponse
      */
-    public function index(Request $request): View
+    public function index(): InertiaResponse
     {
-        // Author is eager loaded from the model
-        $postsQuery = Post::where('posts.is_published', true)
-            ->withCount('comments');
+        $posts = Post::query()
+            // Author is eager loaded from the model
+            ->withCount('comments')
+            ->orderBy('created_at', 'DESC')
+            ->paginate(6);
 
-        return view('index', [
-            'posts' => new PostsResource($postsQuery->paginate($this->perPage)),
+        return Inertia::render('Posts/Index', [
+            'posts' => $posts,
         ]);
     }
 
@@ -43,7 +44,7 @@ class PostsController extends Controller
     {
         $validated = $request->validated();
 
-        $post = Post::create(Arr::only($validated, ['title', 'body', 'user_id', 'is_published']));
+        $post = Post::create(Arr::only($validated, ['title', 'body', 'user_id']));
 
         return response()->json([
             'data' => new PostResource($post),
@@ -75,7 +76,7 @@ class PostsController extends Controller
         $validated = $request->validated();
         $post = Post::findOrFail($id);
 
-        $post->update(Arr::only($validated, ['title', 'body', 'is_published']));
+        $post->update(Arr::only($validated, ['title', 'body']));
 
         return response()->json([
             'data' => new PostResource($post),

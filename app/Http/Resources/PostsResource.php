@@ -19,12 +19,13 @@ class PostsResource extends ResourceCollection
         return $this->map(function (Post $post) {
 
             return [
+                'author' => new UserResource($post->user),
+                'body' => $post->body,
+                'comments_count' => $post->comments_count,
+                'created_at' => $post->updated_at,
                 'id' => $post->id,
                 'title' => $post->title,
-                'body' => $post->body,
                 'updated_at' => $post->updated_at,
-                'comments_count' => $post->comments_count,
-                'author' => new UserResource($post->user),
             ];
         });
     }

@@ -31,7 +31,7 @@ class Post extends Model
      * @var array
      */
     protected array $cast = [
-        'is_published' => Boolean::class,
+       //
     ];
 
     /**

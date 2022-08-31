@@ -25,7 +25,6 @@ class UpdatePostRequest extends FormRequest
     {
         return [
             'body' => 'required|string|max:10000',
-            'is_published' => 'boolean',
             'title' => 'required|string|max:255',
         ];
     }
