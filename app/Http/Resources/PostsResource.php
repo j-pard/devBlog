@@ -3,10 +3,10 @@
 namespace App\Http\Resources;
 
 use App\Models\Post;
-use App\Models\User as UserResource;
+use App\Http\Resources\User as UserResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class Posts extends ResourceCollection
+class PostsResource extends ResourceCollection
 {
     /**
      * Transform the resource into an array.

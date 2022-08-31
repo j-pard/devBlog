@@ -31,12 +31,14 @@
                 @foreach ($posts->items() as $post)
                     <li>
                         <div>
-                            <h2>
+                            <h2 style="margin-bottom: 0">
                                 {{ $post->title }}
-                                <small>{{ $post->author }}</small>
                             </h2>
-                            <p>{{ $post->body }}</p>
-                            <small>{{ $post->updated_at }}</small>
+                            <small>{{ $post->user->name }}, {{ $post->created_at }}</small>
+
+                            <div>
+                                <p>{{ $post->body }}</p>
+                            </div>
                         </div>
                         <div>
                             <button>Comments ({{ $post->comments_count }})</button>
